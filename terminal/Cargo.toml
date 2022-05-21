@@ -1,0 +1,16 @@
+[package]
+name = "terminal"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.57"
+crossterm = "0.23.2"
+indoc = "1.0.6"
+sublime_fuzzy = "0.7.0"
+textwrap = "0.15.0"
+thiserror = "1.0.31"
+tui = { version = "0.18.0", default-features = false, features = ["crossterm"] }
+vault = { version = "0.1.0", path = "../vault" }

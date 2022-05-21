@@ -1,0 +1,52 @@
+{
+  "identifier": "😍",
+  "pepper": "Yvc4fFivcDKthKg8MxJsFpr9u2w=",
+  "seeds": [
+    {
+      "identifier": "Google",
+      "length": 32,
+      "salt": 0,
+      "characters": {
+        "bits": 31
+      },
+      "username": "my username"
+    },
+    {
+      "identifier": "Twitter",
+      "length": 32,
+      "salt": 0,
+      "characters": {
+        "bits": 3
+      },
+      "username": "simon"
+    },
+    {
+      "identifier": "Steam",
+      "length": 1,
+      "salt": 10,
+      "characters": {
+        "bits": 31
+      },
+      "username": "I have 😂 in my username"
+    },
+    {
+      "identifier": "Origin",
+      "length": 100,
+      "salt": 50,
+      "characters": {
+        "bits": 7
+      },
+      "username": "user simon"
+    },
+    {
+      "identifier": "Spotify",
+      "length": 50,
+      "salt": 0,
+      "characters": {
+        "bits": 24
+      },
+      "username": "åjdå"
+    }
+  ],
+  "auth_token": "qBwZ8meJxh7nezkJyX4T41G+oR+qiBp6Y+imPC8AEfU="
+}
