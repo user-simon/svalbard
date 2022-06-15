@@ -171,11 +171,10 @@ impl Vault {
         const LEGAL_SYMBOLS: &str = "._-";
 
         let file_name: String = identifier
-            .ascii_chars() // attempt to convert all non-ascii charcters
-            .flatten() // discard characters with no known ascii representation
+            .ascii_chars()               // attempt to convert all non-ascii charcters
+            .flatten()                   // discard characters with no known ascii representation
             .flat_map(|str| str.chars()) // iterate over all converted characters
-            .filter_map(|c| {
-                // filter or normalize invalid path characters
+            .filter_map(|c| {            // filter or normalize invalid path characters
                 if LEGAL_SYMBOLS.contains(c) {
                     Some(c)
                 } else if c.is_alphanumeric() {
@@ -187,7 +186,7 @@ impl Vault {
                 }
             })
             .take(255 - EXTENSION.len()) // enforce max length of filename
-            .chain(EXTENSION.chars()) // add extension
+            .chain(EXTENSION.chars())    // add extension
             .collect();
         [folder, Path::new(&file_name)].iter().collect()
     }
@@ -216,10 +215,18 @@ mod tests {
     #[test]
     fn path_of() {
         let data = [
-            (("vaults", "test"), "vaults/test.vault"),
-            (("vaults", "Hello world"), "vaults/hello_world.vault"),
-            (("vaults", "åäö"), "vaults/aao.vault"),
-            (("vaults", "åäö"), "vaults/aao.vault"),
+            (
+                ("vaults", "test"),
+                "vaults/test.vault"
+            ),
+            (
+                ("vaults", "Hello world"),
+                "vaults/hello_world.vault"
+            ),
+            (
+                ("vaults", "åäö"),
+                "vaults/aao.vault"
+            ),
             (
                 ("vaults", "😀 My secret vault 😍"),
                 "vaults/grinning_my_secret_vault_heart_eyes.vault",

@@ -7,14 +7,6 @@ use rand::Rng;
 
 use crate::seed::*;
 
-// IDEAS:
-// password length range instead of fixed
-//
-// simplify seed variables with templates, like:
-// PIN    => --N--, <length>
-// BASIC  => -LN--, length 15-20
-// MEDIUM => ULNS-, length 20-35
-
 struct PasswordTable {
     target_len: usize,
     sets: Vec<&'static[u8]>,

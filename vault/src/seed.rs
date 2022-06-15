@@ -54,8 +54,10 @@ impl ToString for Characters {
 pub struct Seed {
     /// Unique seed identifier, e.g. "GitHub".
     pub identifier: String,
-    /// Specifies length.
-    pub length: u8,
+    /// Specifies the minimum length.
+    pub min_len: u8,
+    /// Specifies the maximum length.
+    pub max_len: u8,
     /// Facilitates modifying output without changing other parameters. Does not have to be
     /// cryptographically secure.
     pub salt: u64,
@@ -64,6 +66,56 @@ pub struct Seed {
     /// Contains username for service. Provided for convenience only; does not participate in
     /// output.
     pub username: Option<String>,
+}
+
+impl Seed {
+    pub fn basic(identifier: String, username: Option<String>) -> Seed {
+        Seed {
+            identifier,
+            min_len: 12,
+            max_len: 20,
+            salt: 0,
+            characters: Characters::LOWER_CASE |
+                        Characters::NUMERICAL,
+            username,
+        }
+    }
+
+    pub fn medium(identifier: String, username: Option<String>) -> Seed {
+        Seed {
+            identifier,
+            min_len: 20,
+            max_len: 40,
+            salt: 0,
+            characters: Characters::UPPER_CASE |
+                        Characters::LOWER_CASE |
+                        Characters::NUMERICAL  |
+                        Characters::SPECIAL,
+            username,
+        }
+    }
+
+    pub fn advanced(identifier: String, username: Option<String>) -> Seed {
+        Seed {
+            identifier,
+            min_len: 40,
+            max_len: 64,
+            salt: 0,
+            characters: Characters::all(),
+            username,
+        }
+    }
+
+    pub fn pin(identifier: String, username: Option<String>, length: u8) -> Seed {
+        Seed {
+            identifier,
+            min_len: length,
+            max_len: length,
+            salt: 0,
+            characters: Characters::NUMERICAL,
+            username,
+        }
+    }
 }
 
 #[cfg(test)]
@@ -80,9 +132,9 @@ mod tests {
     fn character_get() {
         assert_eq!(Characters::UPPER_CASE.get(), [U]);
         assert_eq!(Characters::LOWER_CASE.get(), [L]);
-        assert_eq!(Characters::NUMERICAL.get(), [N]);
-        assert_eq!(Characters::SPECIAL.get(), [S]);
-        assert_eq!(Characters::RARE.get(), [R]);
+        assert_eq!(Characters::NUMERICAL.get(),  [N]);
+        assert_eq!(Characters::SPECIAL.get(),    [S]);
+        assert_eq!(Characters::RARE.get(),       [R]);
 
         assert_eq!(
             (Characters::UPPER_CASE | Characters::LOWER_CASE).get(),
