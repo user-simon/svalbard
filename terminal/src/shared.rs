@@ -1,12 +1,9 @@
-use std::{path::PathBuf, env};
+use std::{env, path::PathBuf};
 
 pub fn exe_folder() -> PathBuf {
     env::current_exe()
         .ok()
-        .and_then(|path| {
-            path.parent()
-                .map(|parent| parent.to_owned())
-        })
+        .and_then(|path| path.parent().map(|parent| parent.to_owned()))
         .unwrap()
 }
 
